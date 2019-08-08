@@ -14,7 +14,7 @@ class Solution(object):
         if(target == 0): 
             # res_temp=[]
             # res_temp=res.copy()
-            # 用copy()   或者  [:]    都是给result append一个内容，其地址独立于res;
+            # 用copy()或者[:]都是给result append一个内容，其地址独立于res;
             # 若是仅仅result.append(res),那么result里面的内容仅是一个指向res的指针，其内容随res的改变而改变。
             self.result.append(res[:])
             return
