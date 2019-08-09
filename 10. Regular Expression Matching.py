@@ -11,16 +11,20 @@ class Solution(object):
         n = len(p)
         dp = [[0 for _ in range(n+1)] for _ in range(m+1)]
         dp[0][0] = 1   #0 表示空字符串
-        if n >=2 and p[1] == "*": 
-            dp[0][2] = 1
-            j = 3
-            while j<=n:
-                if p[j-1] == "*": 
-                    dp[0][j] = 1
-                    j+=1
-                elif j<n and p[j] == "*":
-                        j+=1
-                else:break
+        # if n >=2 and p[1] == "*": 
+        #     dp[0][2] = 1
+        #     j = 3
+        #     while j<=n:
+        #         if p[j-1] == "*": 
+        #             dp[0][j] = 1
+        #             j+=1
+        #         elif j<n and p[j] == "*":
+        #                 j+=1
+        #         else:break
+        #上面这块自己写的，看了discuss可以替换为：
+        for j in range(1,n+1):
+            if (p[j-1] == "*" and dp[0][j-2] == 1): dp[0][j] = 1
+
                 
         for i in range(1,m+1):
             for j in range(1,n+1):
