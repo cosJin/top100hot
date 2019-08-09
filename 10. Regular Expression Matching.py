@@ -18,6 +18,8 @@ class Solution(object):
                 if p[j-1] == "*": 
                     dp[0][j] = 1
                     j+=1
+                elif j<n and p[j] == "*":
+                        j+=1
                 else:break
                 
         for i in range(1,m+1):
@@ -26,11 +28,11 @@ class Solution(object):
                     dp[i][j] = 1
                 elif p[j-1] == "*" and dp[i-1][j-1] == 1 and s[i-1] == s[i-2]:
                     dp[i][j] = 1
-                elif p[j-1] == "*" and  dp[i][j-1] == 1:  #这个一开始没考虑到
+                elif p[j-1] == "*" and  (dp[i][j-1] == 1 or dp[i][j-2] == 1):  #这个一开始没考虑到
                     dp[i][j] = 1
-                elif (p[j-1] == "*" and p[j-2] == "." and dp[i-2][j] == 1):
+                elif (p[j-1] == "*" and p[j-2] == "." and dp[i-1][j] == 1):
                     dp[i][j] = 1
         return dp[-1][-1]
 a = Solution()
-print(a.isMatch("aab","c*a*b"))
+print(a.isMatch("","a*"))
 
