@@ -9,19 +9,28 @@ class Solution(object):
         #后来考虑用栈，匹配到一个字符就弹出去，最后看栈是否为空即可
         m = len(s)
         n = len(p)
-        dp = [[0 for _ in range(n)] for _ in range(m)]
-        dp[-1][-1] = 1   #为了覆盖空字符串越界的情况，可以先设置dp[-1][-1] = 1,也不影响最终结果。
-        for i in range(m):
-            for j in range(n):
-                if (s[i] == p[j] or p[j] == ".") and dp[i-1][j-1]==1:
+        dp = [[0 for _ in range(n+1)] for _ in range(m+1)]
+        dp[0][0] = 1   #0 表示空字符串
+        if n >=2 and p[1] == "*": 
+            dp[0][2] = 1
+            j = 3
+            while j<=n:
+                if p[j-1] == "*": 
+                    dp[0][j] = 1
+                    j+=1
+                else:break
+                
+        for i in range(1,m+1):
+            for j in range(1,n+1):
+                if (s[i-1] == p[j-1] or p[j-1] == ".") and dp[i-1][j-1]==1:
                     dp[i][j] = 1
-                elif p[j] == "*" and dp[i-1][j-1] == 1 and s[i] == s[i-1]:
+                elif p[j-1] == "*" and dp[i-1][j-1] == 1 and s[i-1] == s[i-2]:
                     dp[i][j] = 1
-                elif p[j] == "*" and  dp[i][j-1] == 1:
+                elif p[j-1] == "*" and  dp[i][j-1] == 1:  #这个一开始没考虑到
                     dp[i][j] = 1
-                else:dp[i][j] = 0
-        print(dp)
-        return dp[m-1][n-1]
+                elif (p[j-1] == "*" and p[j-2] == "." and dp[i-2][j] == 1):
+                    dp[i][j] = 1
+        return dp[-1][-1]
 a = Solution()
-print(a.isMatch("ddf","dd**f"))
+print(a.isMatch("aab","c*a*b"))
 
