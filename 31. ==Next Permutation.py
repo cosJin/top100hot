@@ -12,10 +12,21 @@ class Solution(object):
         # 所以在调换了4和这5之后，需要把子数组8,7,4,1按照升序排列，nums变为6,5,5,1,4,7,8，
         # 这个数组就是我们要找的下一个更大的数字排列组合了。
         for i in range(len(nums)-1,0,-1):
-            print(i)
             if nums[i] > nums[i-1]:
-                tag = i-1
-
-
+                a = nums[i:]
+                a.sort()
+                for j in range(len(a)):
+                    if a[j]>nums[i-1]:
+                        nums[i-1],a[j] = a[j],nums[i-1]
+                        break
+                for n in range(i,len(nums)):
+                    nums[n] = a[n-i]
+                break
+            elif i == 1:
+                nums.sort()
+                return 
+        return
 a = Solution()
-print(a.nextPermutation([2,4,5]))
+nums = [3,2,1]
+a.nextPermutation(nums)
+print(nums)
