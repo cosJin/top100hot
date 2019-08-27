@@ -16,5 +16,3 @@ class Solution(object):
         res+=[root.val]
         res+=self.inorderTraversal(root.right)
         return res
-a = Solution()
-print(a.inorderTraversal())
