@@ -18,3 +18,5 @@ for i in range(data_len-1):
 for i in range (len(data)):
     print(data[i])
 
+https://www.jianshu.com/p/9923f82af461
+https://zhidao.baidu.com/question/238025011.html
